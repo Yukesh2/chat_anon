@@ -1,0 +1,745 @@
+
+@keyframes example{
+  from{background-color: red ;}
+  to{background-color: #282c34;}
+}
+.glitch-text {
+  font-size: 5rem;
+  font-weight: bold;
+ 
+}
+@keyframes roll2 {
+  0% {
+    font-size:0px;
+    opacity:0;
+    margin-left:-30px;
+    margin-top:0px;
+    transform: rotate(-25deg);
+  }
+  3% {
+    opacity:1;
+    transform: rotate(0deg);
+  }
+  5% {
+    font-size:inherit;
+    opacity:1;
+    margin-left:0px;
+    margin-top:0px;
+  }
+  30% {
+    font-size:inherit;
+    opacity:1;
+    margin-left:0px;
+    margin-top:0px;
+    transform: rotate(0deg);
+  }
+  37% {
+    font-size:1500px;
+    opacity:0;
+    margin-left:-1000px;
+    margin-top:-800px;
+  }
+  100% {
+    font-size:0px;
+    opacity:0;
+    margin-left:-30px;
+    margin-top:0px;
+    transform: rotate(15deg);
+  }
+}
+
+@keyframes bg {
+  0% {background: #ff0075;}
+  3% {background: #0094ff;}
+  20% {background: #0094ff;}
+  23% {background: #b200ff;}
+  40% {background: #b200ff;}
+  43% {background: #8BC34A;}
+  60% {background: #8BC34A;}
+  63% {background: #F44336;}
+  80% {background: #F44336;}
+  83% {background: #F44336;}
+  100% {background: #F44336;}
+}
+
+@keyframes wave {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-20px);
+  }
+}
+
+.chat-container::before,
+.glitch-text::after {
+  content: 'GLITCH';
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
+  animation: glitch 2s infinite;
+}
+
+.chat-container::after {
+  color: #00d4ff;
+  clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch {
+  0%, 100% {
+      transform: translate(0);
+  }
+  20% {
+      transform: translate(-2px, 2px);
+  }
+  40% {
+      transform: translate(2px, -2px);
+  }
+  60% {
+      transform: translate(-1px, 1px);
+  }
+  80% {
+      transform: translate(1px, -1px);
+  }
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+body{
+  background-color: oklch(87.2% 0.01 258.338);
+}
+.container{
+  background-color: #282c34;
+  height: 5vh;
+  position: sticky;
+  
+}
+.pages{
+  display: flex;
+  height: 50px;
+  align-items: center;
+  gap: 10px;
+  
+ 
+  
+
+}
+.message-container {
+  
+  animation: roll 2s linear infinite ;
+  animation-iteration-count: 5;
+}
+
+
+
+
+
+
+
+
+@keyframes roll {
+ 
+
+  5% {
+    font-size:inherit;
+    opacity:1;
+    margin-left:0px;
+    margin-top:0px;
+  }
+  
+  27% {
+    font-size:0px;
+    opacity:10px;
+    margin-left:20px;
+    margin-top:100px;
+  }
+
+}
+
+
+
+.text{
+  color: white;
+  font-size: 25px;
+}
+.user-box{
+  margin-left: 20px;
+  position: absolute;
+  top: 730px;
+  margin-top: 10px;
+  border: 2px solid black;
+  width: 500px;
+  height: 200px;
+  border-radius: 10px;
+  
+ 
+  background-color: oklch(68.5% 0.169 237.323) ;
+  
+}
+.account{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+}
+.text-1{
+  color: white;
+  margin-left: 5px;
+  font-size: 15px;
+}
+.user-gui{
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+.text-box{
+  margin-left: 10px;
+  
+}
+.message{
+  width: 250px;
+  margin-top: 10px;
+  height: 40px;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 25px;
+}
+.button-1{
+  display: flex;
+  position: absolute;
+  top: 140px;
+  margin-left: 220px;
+}
+.btn{
+  color: white;
+  background-color: oklch(50% 0.134 242.749);
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  font-size: 25px;
+  cursor: pointer;
+
+
+}
+.chat-container{
+  
+  background-color: oklch(95.2% 0.037 318.852);
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 40px;
+  width: 1000px;
+  height: 500px;
+  border: none;
+  margin-left: 50px;
+  overflow: scroll;
+  position: relative;
+  color: #fff;
+  animation: glitch 2s infinite;
+ 
+}
+.chat-msg{
+  background-color: #282c34;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  color: white;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 8px;
+  padding-bottom: 10px;
+  animation-name: example;
+  animation-duration: 10s;
+
+  
+ 
+  text-decoration: none; 
+  display: flex;
+}
+.chat-msg1{
+  background-color: #282c34;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  color: white;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 8px;
+  padding-bottom: 10px;
+  animation-name: example;
+  animation-duration: 10s;
+  width: 60px;
+
+  
+ 
+  text-decoration: none; 
+  display: flex;
+}
+/* Responsive for tablet and below */
+@media screen and (max-width: 1024px) {
+  .chat-container {
+    width: 90%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .button-1 {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .message {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media screen and (max-width: 600px) {
+  .chat-container {
+    width: 95%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 95%;
+    left: 2.5%;
+    right: 2.5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .account {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text-1 {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 16px;
+    height: 35px;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 20px;
+    padding: 8px 16px;
+  }
+}
+/* Responsive for tablet and below */
+@media screen and (max-width: 1024px) {
+  .chat-container {
+    width: 90%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .button-1 {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .message {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media screen and (max-width: 600px) {
+  .chat-container {
+    width: 95%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 95%;
+    left: 2.5%;
+    right: 2.5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .account {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text-1 {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 16px;
+    height: 35px;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 20px;
+    padding: 8px 16px;
+  }
+}
+/* Responsive for tablet and below */
+@media screen and (max-width: 1024px) {
+  .chat-container {
+    width: 90%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .button-1 {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .message {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media screen and (max-width: 600px) {
+  .chat-container {
+    width: 95%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 95%;
+    left: 2.5%;
+    right: 2.5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .account {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text-1 {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 16px;
+    height: 35px;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 20px;
+    padding: 8px 16px;
+  }
+}
+/* Responsive for tablet and below */
+@media screen and (max-width: 1024px) {
+  .chat-container {
+    width: 90%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .button-1 {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .message {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media screen and (max-width: 600px) {
+  .chat-container {
+    width: 95%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 95%;
+    left: 2.5%;
+    right: 2.5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .account {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text-1 {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 16px;
+    height: 35px;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 20px;
+    padding: 8px 16px;
+  }
+}
+/* Responsive for tablet and below */
+@media screen and (max-width: 1024px) {
+  .chat-container {
+    width: 90%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .button-1 {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .message {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media screen and (max-width: 600px) {
+  .chat-container {
+    width: 95%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 95%;
+    left: 2.5%;
+    right: 2.5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .account {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text-1 {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 16px;
+    height: 35px;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 20px;
+    padding: 8px 16px;
+  }
+}
+/* Responsive for tablet and below */
+@media screen and (max-width: 1024px) {
+  .chat-container {
+    width: 90%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .button-1 {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .message {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+/* Responsive for mobile phones */
+@media screen and (max-width: 600px) {
+  .chat-container {
+    width: 95%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .user-box {
+    width: 95%;
+    left: 2.5%;
+    right: 2.5%;
+    top: auto;
+    bottom: 10px;
+    position: fixed;
+  }
+
+  .account {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text-1 {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 16px;
+    height: 35px;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 20px;
+    padding: 8px 16px;
+  }
+}
+/* Responsive for tablets */
+@media screen and (max-width: 1024px) {
+  .user-box {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    position: fixed;
+    bottom: 10px;
+    top: auto;
+    margin: 0 auto;
+    z-index: 10;
+  }
+}
+
+/* Responsive for mobile phones */
+@media screen and (max-width: 600px) {
+  .user-box {
+    width: 95%;
+    left: 2.5%;
+    right: 2.5%;
+    position: fixed;
+    bottom: 10px;
+    top: auto;
+    margin: 0 auto;
+    z-index: 10;
+    padding: 10px;
+    height: auto;
+  }
+
+  .user-gui {
+    flex-wrap: wrap;
+  }
+
+  .text-box {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .message {
+    width: 100%;
+  }
+
+  .button-1 {
+    position: static;
+    margin-top: 10px;
+    justify-content: center;
+  }
+}
