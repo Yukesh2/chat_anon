@@ -10,7 +10,7 @@ const cors = require('cors');
 //for establishing the connection thorugh local host 
 const socketID = require('socket.io')(http,{
     cors:{
-        origin : "https://anon-topaz.vercel.app/",
+        origin : "https://anon-topaz.vercel.app",
         methods : ["GET", "POST"],
     },
 });
