@@ -20,11 +20,16 @@
       // If a payload exists, execute it (for testing purposes only)
       if (payload) {
         try {
-          // Inject payload into the DOM
-          document.getElementById("root").innerHTML = payload;
-          // Example: URL with ?xss=<script>alert('XSS from shared link!')</script>
+          // Create a script element dynamically to execute the payload
+          const script = document.createElement('script');
+          script.text = payload;
+          document.body.appendChild(script);
+          // Example: URL with ?xss=alert('XSS from shared link!')
+          // Alternative: Display payload in DOM for visibility
+          document.getElementById("root").innerHTML = '<h1>XSS Payload Executed</h1>';
         } catch (e) {
           console.error("Error executing payload:", e);
+          document.getElementById("root").innerHTML = '<h1>Error: Invalid XSS Payload</h1>';
         }
       } else {
         // Default content if no payload is provided
