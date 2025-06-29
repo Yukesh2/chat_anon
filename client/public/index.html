@@ -13,12 +13,23 @@
     <div id="root"></div>
     <!-- XSS testing code for controlled environment -->
     <script>
-      // Basic XSS example - displays an alert (for testing purposes only)
-      alert("This is a test XSS alert!");
-      
-      // Example of injecting content (for testing purposes only)
-      document.getElementById("root").innerHTML = "<h1>Test XSS: <script>alert('Injected script!');</script></h1>";
+      // Extract query parameter from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const payload = urlParams.get('xss');
+
+      // If a payload exists, execute it (for testing purposes only)
+      if (payload) {
+        try {
+          // Inject payload into the DOM
+          document.getElementById("root").innerHTML = payload;
+          // Example: URL with ?xss=<script>alert('XSS from shared link!')</script>
+        } catch (e) {
+          console.error("Error executing payload:", e);
+        }
+      } else {
+        // Default content if no payload is provided
+        document.getElementById("root").innerHTML = "<h1>Welcome to Anonymous Chatting</h1>";
+      }
     </script>
   </body>
 </html>
-
