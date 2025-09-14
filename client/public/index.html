@@ -1,75 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Firebase Test App</title>
-  <script type="module">
-    // Import the Firebase modules
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
-
-    // Your Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyDOshL-50Jw14Y0t_N-nYXbILewJIWCr4g",
-      authDomain: "ctf-67ebf.firebaseapp.com",
-      projectId: "ctf-67ebf",
-      storageBucket: "ctf-67ebf.firebasestorage.app",
-      messagingSenderId: "702876965627",
-      appId: "1:702876965627:web:cb5c5444bacbf52373ae5e"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    // Function to register a user
-    async function registerUser(email, password) {
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        console.log("User registered:", userCredential.user);
-      } catch (error) {
-        console.error("Error registering:", error.message);
-      }
-    }
-
-    // Function to login a user
-    async function loginUser(email, password) {
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("User logged in:", userCredential.user);
-      } catch (error) {
-        console.error("Error logging in:", error.message);
-      }
-    }
-
-    // Function to add a document to Firestore
-    async function addMessage(message) {
-      try {
-        const docRef = await addDoc(collection(db, "messages"), { text: message, timestamp: Date.now() });
-        console.log("Document written with ID:", docRef.id);
-      } catch (e) {
-        console.error("Error adding document:", e);
-      }
-    }
-
-    // Function to read all messages
-    async function readMessages() {
-      const querySnapshot = await getDocs(collection(db, "messages"));
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} =>`, doc.data());
-      });
-    }
-
-    // Example usage
-    registerUser("test@example.com", "password123");
-    loginUser("test@example.com", "password123");
-    addMessage("Hello Firebase!");
-    readMessages();
-  </script>
+  <meta charset="utf-8"/>
+  <title>Safe Demo: fetch & display only</title>
 </head>
 <body>
-  <h1>Firebase Test App</h1>
+  <h2>Safe Demo — Fetch /accountDetails (no exfiltrate)</h2>
+  <button id="go">Fetch from target</button>
+  <pre id="out">idle</pre>
+
+  <script>
+    const outEl = document.getElementById('out');
+    function out(text){ outEl.textContent = text; }
+
+    async function runDemo(){
+      out('requesting target...');
+      try{
+        const resp = await fetch("https://0af7003203820d368122348900da003f.web-security-academy.net/accountDetails", {
+          method: "GET",
+          credentials: "include"
+        });
+        if (!resp.ok) { out('target status: ' + resp.status); return; }
+        const data = await resp.json();
+        // SAFE: only display on this page, do NOT forward to any external server
+        out(JSON.stringify(data, null, 2));
+      } catch (e){
+        out('error: ' + e);
+      }
+    }
+
+    document.getElementById('go').addEventListener('click', runDemo);
+  </script>
 </body>
 </html>
