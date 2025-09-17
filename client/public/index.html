@@ -1,46 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>CORS Test</title>
-</head>
-<body>
-  <h1>CORS Test</h1>
-  <button id="testCors">Test CORS</button>
+  <head>
+    <meta charset="utf-8" />
+   
 
-  <script>
-    document.getElementById('testCors').addEventListener('click', async () => {
-      const url = 'https://api.stripe.com/v1/payment_methods';
-      
-      const formData = new URLSearchParams();
-      formData.append('type', 'card');
-      formData.append('card[number]', '5655664515156552');
-      formData.append('card[cvc]', '150');
-      formData.append('card[exp_month]', '02');
-      formData.append('card[exp_year]', '28');
-      formData.append('billing_details[name]', 'yukesh khanal');
-      formData.append('billing_details[email]', 'silentnull@bugcrowdninja.com');
-      formData.append('billing_details[address][country]', 'NP');
-      formData.append('key', 'pk_live_9ESa8QRql3Jv9oKRVFLxpWvI');
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
 
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          body: formData,
-          credentials: 'include',  // Important for testing if cookies/credentials are allowed
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        });
 
-        const data = await response.json();
-        console.log('Response:', data);
-        alert('Check console for response!');
-      } catch (err) {
-        console.error('CORS blocked or error occurred:', err);
-        alert('CORS blocked or network error!');
-      }
-    });
-  </script>
-</body>
+    <title>Anounymous Chatting</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>
